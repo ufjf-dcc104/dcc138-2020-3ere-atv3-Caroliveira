@@ -16,17 +16,31 @@
 
       skelly.addEventListener("load", finishLoading);
 
-      ctx.fillStyle = "green";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      function drawBackground() {
+        ctx.fillStyle = "green";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      function finishLoading() {}
 
-      let row = 0;
+      let row = 2;
       let column = 1;
-      function finishLoading() {
-        ctx.drawImage(skelly,
-        // sx, sy, sw, sh
-        column*64, row*64, 64, 64,
-        // dx, dy, dw, dh
-        0, 0, 64, 64);
+
+      let t0;
+      let dt;
+
+      requestAnimationFrame(step);
+      function step(t) {
+        t0 = t0 ?? t;
+        dt = (t - t0) / 1000;
+        drawBackground();
+
+        column += 9*dt;
+        if (column > 6) column = 0;
+
+        ctx.drawImage(skelly, Math.floor(column) * 64, row * 64, 64, 64, 0, 0, 64, 64);
+
+        requestAnimationFrame(step);
+        t0 = t;
       }
     </script>
   </body>
