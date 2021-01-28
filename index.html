@@ -25,6 +25,33 @@
       let row = 2;
       let column = 1;
 
+      let posture = 0;
+      let frame = 0;
+
+      const postures = [
+        {fmax: 7, pv: 9},
+        {fmax: 7, pv: 9},
+        {fmax: 7, pv: 9},
+        {fmax: 7, pv: 9},
+        {fmax: 8, pv: 9},
+        {fmax: 8, pv: 9},
+        {fmax: 8, pv: 9},
+        {fmax: 8, pv: 9},
+        {fmax: 9, pv: 9},
+        {fmax: 9, pv: 9},
+        {fmax: 9, pv: 9},
+        {fmax: 9, pv: 9},
+        {fmax: 6, pv: 9},
+        {fmax: 6, pv: 9},
+        {fmax: 6, pv: 9},
+        {fmax: 6, pv: 9},
+        {fmax: 13, pv: 27},
+        {fmax: 13, pv: 27},
+        {fmax: 13, pv: 27},
+        {fmax: 13, pv: 27},
+        {fmax: 6, pv: 9},
+      ];
+
       let t0;
       let dt;
 
@@ -34,10 +61,19 @@
         dt = (t - t0) / 1000;
         drawBackground();
 
-        column += 9*dt;
-        if (column > 6) column = 0;
+        frame = frame > postures[posture].fmax ? 0 : frame + postures[posture].pv * dt;
 
-        ctx.drawImage(skelly, Math.floor(column) * 64, row * 64, 64, 64, 0, 0, 64, 64);
+        ctx.drawImage(
+          skelly,
+          Math.floor(frame) * 64,
+          posture * 64,
+          64,
+          64,
+          0,
+          0,
+          64,
+          64
+        );
 
         requestAnimationFrame(step);
         t0 = t;
