@@ -26,27 +26,27 @@
       let frame = 0;
 
       const postures = [
-        {fmax: 7, pv: 9},
-        {fmax: 7, pv: 9},
-        {fmax: 7, pv: 9},
-        {fmax: 7, pv: 9},
-        {fmax: 8, pv: 9},
-        {fmax: 8, pv: 9},
-        {fmax: 8, pv: 9},
-        {fmax: 8, pv: 9},
-        {fmax: 9, pv: 9},
-        {fmax: 9, pv: 9},
-        {fmax: 9, pv: 9},
-        {fmax: 9, pv: 9},
-        {fmax: 6, pv: 9},
-        {fmax: 6, pv: 9},
-        {fmax: 6, pv: 9},
-        {fmax: 6, pv: 9},
-        {fmax: 13, pv: 27},
-        {fmax: 13, pv: 27},
-        {fmax: 13, pv: 27},
-        {fmax: 13, pv: 27},
-        {fmax: 6, pv: 9},
+        {fmax: 7, vel: 9},
+        {fmax: 7, vel: 9},
+        {fmax: 7, vel: 9},
+        {fmax: 7, vel: 9},
+        {fmax: 8, vel: 9},
+        {fmax: 8, vel: 9},
+        {fmax: 8, vel: 9},
+        {fmax: 8, vel: 9},
+        {fmax: 9, vel: 9},
+        {fmax: 9, vel: 9},
+        {fmax: 9, vel: 9},
+        {fmax: 9, vel: 9},
+        {fmax: 6, vel: 9},
+        {fmax: 6, vel: 9},
+        {fmax: 6, vel: 9},
+        {fmax: 6, vel: 9},
+        {fmax: 13, vel: 27},
+        {fmax: 13, vel: 27},
+        {fmax: 13, vel: 27},
+        {fmax: 13, vel: 27},
+        {fmax: 6, vel: 9},
       ];
 
       let t0;
@@ -58,7 +58,7 @@
         dt = (t - t0) / 1000;
         drawBackground();
 
-        frame = frame > postures[posture].fmax ? 0 : frame + postures[posture].pv * dt;
+        frame = frame > postures[posture].fmax ? 0 : frame + postures[posture].vel * dt;
 
         ctx.drawImage(
           lady,
