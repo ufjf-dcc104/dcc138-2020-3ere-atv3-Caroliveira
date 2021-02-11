@@ -11,10 +11,10 @@
     <script>
       const canvas = document.querySelector("canvas");
       const ctx = canvas.getContext("2d");
-      const skelly = new Image();
-      skelly.src = "assets/skelly.png";
+      const lady = new Image();
+      lady.src = "assets/female-character.png";
 
-      skelly.addEventListener("load", finishLoading);
+      lady.addEventListener("load", finishLoading);
 
       function drawBackground() {
         ctx.fillStyle = "green";
@@ -64,7 +64,7 @@
         frame = frame > postures[posture].fmax ? 0 : frame + postures[posture].pv * dt;
 
         ctx.drawImage(
-          skelly,
+          lady,
           Math.floor(frame) * 64,
           posture * 64,
           64,
