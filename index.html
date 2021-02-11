@@ -22,32 +22,32 @@
       let row = 2;
       let column = 1;
 
-      let posture = 0;
-      let frame = 0;
-
       const postures = [
-        {init: 7, end: 7, vel: 9},
-        {init: 7, end: 7, vel: 9},
-        {init: 7, end: 7, vel: 9},
-        {init: 7, end: 7, vel: 9},
-        {init: 8, end: 8, vel: 9},
-        {init: 8, end: 8, vel: 9},
-        {init: 8, end: 8, vel: 9},
-        {init: 8, end: 8, vel: 9},
-        {init: 9, end: 9, vel: 9},
-        {init: 9, end: 9, vel: 9},
-        {init: 9, end: 9, vel: 9},
-        {init: 9, end: 9, vel: 9},
-        {init: 6, end: 6, vel: 9},
-        {init: 6, end: 6, vel: 9},
-        {init: 6, end: 6, vel: 9},
-        {init: 6, end: 6, vel: 9},
-        {init: 13, end: 13, vel: 27},
-        {init: 13, end: 13, vel: 27},
-        {init: 13, end: 13, vel: 27},
-        {init: 13, end: 13, vel: 27},
-        {init: 6, end: 6, vel: 9},
+        {row: 0, init: 0, end: 3, vel: 2}, // walk up
+        {row: 0, init: 3, end: 6, vel: 2}, // run up
+        {row: 0, init: 7, end: 7, vel: 9},
+        {row: 0, init: 7, end: 7, vel: 9},
+        {row: 0, init: 8, end: 8, vel: 9},
+        {row: 0, init: 8, end: 8, vel: 9},
+        {row: 0, init: 8, end: 8, vel: 9},
+        {row: 0, init: 8, end: 8, vel: 9},
+        {row: 0, init: 9, end: 9, vel: 9},
+        {row: 0, init: 9, end: 9, vel: 9},
+        {row: 0, init: 9, end: 9, vel: 9},
+        {row: 0, init: 9, end: 9, vel: 9},
+        {row: 0, init: 6, end: 6, vel: 9},
+        {row: 0, init: 6, end: 6, vel: 9},
+        {row: 0, init: 6, end: 6, vel: 9},
+        {row: 0, init: 6, end: 6, vel: 9},
+        {row: 0, init: 13, end: 13, vel: 27},
+        {row: 0, init: 13, end: 13, vel: 27},
+        {row: 0, init: 13, end: 13, vel: 27},
+        {row: 0, init: 13, end: 13, vel: 27},
+        {row: 0, init: 6, end: 6, vel: 9},
       ];
+
+      let posture = 1;
+      let frame = postures[posture].init;
 
       let t0;
       let dt;
@@ -58,12 +58,12 @@
         dt = (t - t0) / 1000;
         drawBackground();
 
-        frame = frame > postures[posture].end ? 0 : frame + postures[posture].vel * dt;
+        frame = frame > postures[posture].end ? postures[posture].init : frame + postures[posture].vel * dt;
 
         ctx.drawImage(
           lady,
           Math.floor(frame) * 24,
-          posture * 32,
+          postures[posture].row * 32,
           24,
           32,
           0,
