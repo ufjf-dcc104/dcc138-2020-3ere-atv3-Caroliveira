@@ -14,13 +14,10 @@
       const lady = new Image();
       lady.src = "assets/female-character.png";
 
-      lady.addEventListener("load", finishLoading);
-
       function drawBackground() {
         ctx.fillStyle = "green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
-      function finishLoading() {}
 
       let row = 2;
       let column = 1;
