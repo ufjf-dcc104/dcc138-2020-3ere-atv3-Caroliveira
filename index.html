@@ -8,8 +8,11 @@
   <body>
     <h1>Exemplo 02</h1>
     <canvas></canvas>
+    <p>* Use as setas de direita e esquerda para alterar as poses.</p>
+    <p id="posture"></p>
     <script>
       const canvas = document.querySelector("canvas");
+      const p = document.getElementById("posture");
       const ctx = canvas.getContext("2d");
       const lady = new Image();
       lady.src = "assets/female-character.png";
@@ -20,25 +23,29 @@
       }
 
       const postures = [
-        {row: 0, init: 0, end: 3, vel: 2}, // 0 - walk up
-        {row: 0, init: 3, end: 6, vel: 2}, // 1 - run up
-        {row: 0, init: 9, end: 12, vel: 2}, // 2 - jump up
-        {row: 1, init: 0, end: 3, vel: 2}, // 3 - walk right
-        {row: 1, init: 3, end: 6, vel: 2}, // 4 - run right
-        {row: 1, init: 9, end: 12, vel: 2}, // 5 - jump right
-        {row: 2, init: 0, end: 3, vel: 2}, // 6 - walk down
-        {row: 2, init: 3, end: 6, vel: 2}, // 7 - run down
-        {row: 2, init: 9, end: 12, vel: 2}, // 8 - jump down
-        {row: 3, init: 0, end: 3, vel: 2}, // 9 - walk left
-        {row: 3, init: 3, end: 6, vel: 2}, // 10 - run left
-        {row: 3, init: 9, end: 12, vel: 2}, // 11 - jump left
-        {row: 4, init: 0, end: 5, vel: 2}, // 12 - attack up
-        {row: 6, init: 0, end: 5, vel: 2}, // 13 - attack right
-        {row: 7, init: 0, end: 5, vel: 2}, // 14 - attack down
-        {row: 8, init: 0, end: 5, vel: 2}, // 15 - attack left
+        { row: 0, init: 0, end: 3, vel: 2, action: "walk up" },
+        { row: 0, init: 3, end: 6, vel: 2, action: "run up" },
+        { row: 0, init: 7, end: 9, vel: 2, action: "crouch" },
+        { row: 0, init: 9, end: 12, vel: 2, action: "jump up" },
+        { row: 1, init: 0, end: 3, vel: 2, action: "walk right" },
+        { row: 1, init: 3, end: 6, vel: 2, action: "run right" },
+        { row: 1, init: 6, end: 9, vel: 2, action: "sleep" },
+        { row: 1, init: 9, end: 12, vel: 2, action: "jump right" },
+        { row: 2, init: 0, end: 3, vel: 2, action: "walk down" },
+        { row: 2, init: 3, end: 6, vel: 2, action: "run down" },
+        { row: 2, init: 6, end: 9, vel: 2, action: "waking up" },
+        { row: 2, init: 9, end: 12, vel: 2, action: "jump down" },
+        { row: 3, init: 0, end: 3, vel: 2, action: "walk left" },
+        { row: 3, init: 3, end: 6, vel: 2, action: "run left" },
+        { row: 3, init: 6, end: 9, vel: 2, action: "lying down" },
+        { row: 3, init: 9, end: 12, vel: 2, action: "jump left" },
+        { row: 4, init: 0, end: 5, vel: 2, action: "attack up" },
+        { row: 5, init: 0, end: 5, vel: 2, action: "attack right" },
+        { row: 6, init: 0, end: 5, vel: 2, action: "attack down" },
+        { row: 7, init: 0, end: 5, vel: 2, action: "attack left" },
       ];
 
-      let posture = 5;
+      let posture = 0;
       let frame = postures[posture].init;
 
       let t0;
@@ -49,8 +56,12 @@
         t0 = t0 ?? t;
         dt = (t - t0) / 1000;
         drawBackground();
+        p.textContent = `Pose = ${posture} - ${postures[posture].action}`;
 
-        frame = frame > postures[posture].end ? postures[posture].init : frame + postures[posture].vel * dt;
+        frame =
+          frame > postures[posture].end
+            ? postures[posture].init
+            : frame + postures[posture].vel * dt;
 
         ctx.drawImage(
           lady,
@@ -66,6 +77,18 @@
 
         requestAnimationFrame(step);
         t0 = t;
+      }
+
+      addEventListener("keydown", keyPressed);
+      function keyPressed(evt) {
+        switch (evt.key) {
+          case "ArrowLeft":
+            if (posture > 0) posture--;
+            break;
+          case "ArrowRight":
+            if (posture < postures.length - 1) posture++;
+            break;
+        }
       }
     </script>
   </body>
